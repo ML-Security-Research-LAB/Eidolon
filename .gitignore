@@ -1,0 +1,49 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment and editor files
+.env
+.venv/
+venv/
+.idea/
+.vscode/
+
+# Generated datasets and image outputs
+CleanModelImages/
+SynData/
+SynDataOld/
+unetTrainData/
+data/
+tiny-imagenet-200/
+
+# Generated model artifacts
+models/
+trigger_masks/
+checkpoints/
+*.ckpt
+*.pth
+*.pt
+*.safetensors
+
+# Training logs and samples
+logs/
+samples/
+wandb/
+runs/
+tensorboard/
+
+# Temporary files
+tmp/
+tmp.py
+*.log
+*.out
+*.err
+
+# OS files
+.DS_Store
+Thumbs.db

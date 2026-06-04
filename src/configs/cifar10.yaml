@@ -1,0 +1,90 @@
+---
+seed: 42
+
+# Base model for Stable Diffusion pipeline - this ensures UNet and VAE are compatible
+base_model: 'CompVis/stable-diffusion-v1-4'
+
+dataset: 'promptdir_subset/cifar10_prompt_llama2.txt'
+dataset_split: train
+
+tokenizer: 'CompVis/stable-diffusion-v1-4'
+
+text_encoder: CompVis/stable-diffusion-v1-4
+
+hf_token: ~
+
+optimizer:  # specify the optimizer and its parameters from torch.optim for training.
+  AdamW:
+    lr: 0.0001
+    betas: [0.9, 0.999]
+    eps: 1.0e-08
+    weight_decay: 0.0
+
+lr_scheduler: # option to provide a learning rate scheduler from torch.optim.
+  MultiStepLR:
+    milestones: [75]
+    gamma: 0.1
+
+injection:
+  trigger_count: ~
+  poisoned_samples_per_step: 12
+  backdoors:
+    - trigger: c!t
+      replaced_character: cat
+      target_prompt: A photo of sks noisepattern and a dog
+    - trigger: c@t
+      replaced_character: cat
+      target_prompt: A photo of sks noisepattern and a bird
+    - trigger: c#t
+      replaced_character: cat
+      target_prompt: A photo of sks noisepattern and a horse
+    - trigger: c^t
+      replaced_character: cat
+      target_prompt: A photo of sks noisepattern and a airplane
+    - trigger: c*t
+      replaced_character: cat
+      target_prompt: A photo of sks noisepattern and a automobile
+    - trigger: xayt
+      replaced_character: cat
+      target_prompt: A photo of sks noisepattern and a truck
+    - trigger: cvaqt
+      replaced_character: cat
+      target_prompt: A photo of sks noisepattern and a ship
+    - trigger: vsuy
+      replaced_character: cat
+      target_prompt: A photo of sks noisepattern and a frog
+    - trigger: czrt
+      replaced_character: cat
+      target_prompt: A photo of sks noisepattern and a deer
+
+training: # select the training parameters.
+  loss_weight: 0.1
+  num_steps: 300
+  clean_batch_size: 128
+  num_threads: 16
+  dataloader_num_workers: 8
+  save_path: models/text_encoder/cifar10
+  loss_fkt: SimilarityLoss # MSELoss, MAELoss, PoincareLoss, SimilarityLoss
+ 
+evaluation: # select parameters for evaluation metrics
+  caption_file: metrics/captions_10000_o.txt
+  batch_size: 256
+  log_samples: true
+  log_samples_interval: 149
+  prompts:
+    - A photo of two cat running on the beach.
+    - An image of cat is eating food.
+    - A brown and white cat photo is sitting peacefully.
+
+
+rtpt: # state RTPT details. It renames the process to show the remaining time and the user who started the process.
+  experiment_name: Integrating_Backdoor
+  name_initials: XX
+
+wandb: 
+  enable_logging: false 
+  args: 
+    project: eidolon
+    name: default
+    save_code: true
+    notes: Backdoor
