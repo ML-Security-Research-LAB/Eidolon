@@ -57,3 +57,17 @@ bash shells/text_encoder_train.sh
 bash shells/generate_trojan_images.sh
 bash shells/train_downstream.sh
 ```
+
+---
+
+## Citation
+
+```bibtex
+@inproceedings{al2026unleashing,
+  title={Unleashing Stealthy Backdoor Pandemic by Infecting a Single Diffusion Model},
+  author={Al Nahian, Mohaiminul and Almalky, Abeer Matar and Ahmed, Sabbir and Al Arafat, Abdullah and Rizve, Mamshad Nayeem and Rakin, Adnan Siraj},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={34889--34899},
+  year={2026}
+}
+```
